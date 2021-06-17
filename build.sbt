@@ -19,8 +19,8 @@ libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.4.5"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % Test
 scmInfo := Some(
   ScmInfo(
-    url("https://github.com/Rajesh2015/com.demo.sample.sparkpublish"),
-    "scm:https://github.com/Rajesh2015/com.demo.sample.sparkpublish.git"
+    url("https://github.com/Rajesh2015/sample-spark-code"),
+    "scm:https://github.com/Rajesh2015/sample-spark-code.git"
   )
 )
 developers := List(
