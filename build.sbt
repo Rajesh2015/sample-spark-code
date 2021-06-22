@@ -9,6 +9,9 @@ organizationName := "io.github.rajesh2015"
 publishMavenStyle := true
 publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
+sonatypeCredentialHost := "s01.oss.sonatype.org"
+sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
+
 publishTo in ThisBuild := {
   val nexus = "https://s01.oss.sonatype.org/"
   if (isSnapshot.value)
@@ -16,6 +19,7 @@ publishTo in ThisBuild := {
   else
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
+
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.4.5"
 
 scmInfo := Some(
@@ -40,6 +44,7 @@ releaseProcess := Seq[ReleaseStep](
   releaseStepCommand("sonatypeRelease"), // run sonatypeRelease and publish to maven central
   pushChanges // push changes to git
 )
+
 developers := List(
   Developer("Rajesh", "Rajesh Dash", "dashrajesh49@gmail.com", url("http://rajeshblogs.in"))
 )
