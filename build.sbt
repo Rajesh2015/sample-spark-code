@@ -3,7 +3,6 @@ name := "sample-spark-code"
 //crossPaths := false
 homepage := Some(url("https://github.com/Rajesh2015/sample-spark-code"))
 licenses := Seq("Apache 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
-scalaVersion := "2.11.8"
 organization := "io.github.rajesh2015"
 organizationName := "io.github.rajesh2015"
 publishMavenStyle := true
@@ -19,7 +18,8 @@ publishTo in ThisBuild := {
   else
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
-
+assemblyJarName in assembly := s"${name.value}_${scalaBinaryVersion.value}-${version.value}.jar"
+addArtifact(artifact in (Compile, assembly), assembly)
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.4.5"
 
 scmInfo := Some(
@@ -28,6 +28,11 @@ scmInfo := Some(
     "scm:https://github.com/Rajesh2015/sample-spark-code.git"
   )
 )
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", xs@_*) => MergeStrategy.discard
+  case x => MergeStrategy.first
+}
+
 import ReleaseTransformations._
 releaseCrossBuild := true
 releaseProcess := Seq[ReleaseStep](
